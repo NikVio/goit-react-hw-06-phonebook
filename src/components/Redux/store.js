@@ -26,12 +26,12 @@ export const deletedContact = id => {
   };
 };
 
-// const filterContact = id => {
-//   return {
-//     type: 'contacts/filterContact',
-//     payload: id,
-//   };
-// };
+export const filterContact = newContact => {
+  return {
+    type: 'filters/filterContact',
+    payload: newContact,
+  };
+};
 
 const initialState = {
   contacts: initialItems,
@@ -40,7 +40,25 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case 'contacts/deletedContact':
+      return {
+        ...state,
+        contacts: state.contacts.filter(item => item.id !== action.payload),
+      };
+    case 'contacts/addContact':
+      return {
+        ...state,
+        contacts: [...state.contacts, action.payload],
+      };
+    case 'filters/filterContact':
+      return {
+        ...state,
+        filters: action.payload,
+      };
+    default:
+      return state;
+  }
 };
 
 const enhancer = devToolsEnhancer();

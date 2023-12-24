@@ -1,7 +1,7 @@
 import { Contacts } from './Contacts';
 import { ContactBox } from './ContactList.styled';
-import { useSelector, useDispatch } from 'react-redux';
-import { deletedContact } from 'components/Redux/store';
+import { useSelector } from 'react-redux';
+//import { deletedContact } from 'components/Redux/store';
 
 // export const ContactList = ({ items, onDelete }) => {
 //   return (
@@ -16,15 +16,38 @@ import { deletedContact } from 'components/Redux/store';
 // };
 
 export const ContactList = () => {
-  const dispatch = useDispatch();
-
   const items = useSelector(state => state.contacts);
-  const handleDelete = () => dispatch(deletedContact(items.id));
+  const filter = useSelector(state => state.filters);
+  const getVisibleContacts = () => {
+    if (filter === '') {
+      return items;
+    }
+
+    return items.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase().trim())
+    );
+  };
+  //   const checkContact = contacts.some(
+  //     contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
+  //   );
+
+  //   if (checkContact) {
+  //     alert(`${newContact.name} is already in contacts`);
+  //   } else {
+  //     setContacts(prevContacts => {
+  //       return [...prevContacts, { ...add }];
+  //     });
+  //   }
+  // };
+
+  const visibleContacts = getVisibleContacts();
+
+  //const handleDelete = () => dispatch(deletedContact(items.id));
   return (
     <ContactBox>
-      {items.map(item => (
+      {visibleContacts.map(item => (
         <li key={item.id}>
-          <Contacts el={item} Delete={handleDelete} />
+          <Contacts el={item} />
         </li>
       ))}
     </ContactBox>

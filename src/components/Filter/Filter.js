@@ -3,8 +3,13 @@ import {
   FilterBox,
   FilterInput,
 } from 'components/ContactForm/ContactForm.styled';
+import { useSelector, useDispatch } from 'react-redux';
+import { filterContact } from 'components/Redux/store';
 
-export const Filter = ({ filter, onUpdateFilter }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(state => state.filters);
+
   return (
     <FilterBox>
       <FormGroup>
@@ -12,7 +17,7 @@ export const Filter = ({ filter, onUpdateFilter }) => {
         <FilterInput
           type="text"
           value={filter}
-          onChange={evt => onUpdateFilter(evt.target.value)}
+          onChange={evt => dispatch(filterContact(evt.target.value))}
         />
       </FormGroup>
     </FilterBox>
