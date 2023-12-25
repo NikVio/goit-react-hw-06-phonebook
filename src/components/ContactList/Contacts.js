@@ -1,10 +1,10 @@
 import { NameContact, DeleteBtn, WrapperContact } from './Contacts.styled';
 import { useDispatch } from 'react-redux';
-import { deletedContact } from 'components/Redux/store';
+import { deletedContact } from 'components/Redux/contactsSlice';
 
 export const Contacts = ({ el: { name, number, id } }) => {
   const dispatch = useDispatch();
-  //const items = useSelector(state => state.contacts);
+
   const handleDelete = () => dispatch(deletedContact(id));
 
   return (

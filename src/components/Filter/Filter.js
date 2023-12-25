@@ -3,8 +3,8 @@ import {
   FilterBox,
   FilterInput,
 } from 'components/ContactForm/ContactForm.styled';
+import { filterContact } from 'components/Redux/filtersSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { filterContact } from 'components/Redux/store';
 
 export const Filter = () => {
   const dispatch = useDispatch();

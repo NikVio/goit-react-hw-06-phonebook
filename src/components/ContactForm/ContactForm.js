@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { addContact } from 'components/Redux/store';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -11,6 +11,7 @@ import {
 } from './ContactForm.styled';
 
 import * as Yup from 'yup';
+import { addContact } from 'components/Redux/contactsSlice';
 
 const PhoneBookSchema = Yup.object().shape({
   name: Yup.string().min(3, 'Too Short!').required('Required'),
