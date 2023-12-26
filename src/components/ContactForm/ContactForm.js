@@ -44,8 +44,9 @@ export const ContactForm = () => {
         number: '',
       }}
       validationSchema={PhoneBookSchema}
-      onSubmit={values => {
+      onSubmit={(values, actions) => {
         handleCheckContact(values);
+        actions.resetForm();
       }}
     >
       <Form>
