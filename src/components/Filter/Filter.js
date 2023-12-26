@@ -3,12 +3,12 @@ import {
   FilterBox,
   FilterInput,
 } from 'components/ContactForm/ContactForm.styled';
-import { filterContact } from 'components/Redux/filtersSlice';
+import { filterContact, getFilters } from 'components/Redux/filtersSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 export const Filter = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.filters);
+  const filter = useSelector(getFilters);
 
   return (
     <FilterBox>

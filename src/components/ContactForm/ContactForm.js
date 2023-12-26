@@ -1,7 +1,5 @@
 import { Formik } from 'formik';
 
-import { useDispatch, useSelector } from 'react-redux';
-
 import {
   Form,
   Field,
@@ -11,7 +9,8 @@ import {
 } from './ContactForm.styled';
 
 import * as Yup from 'yup';
-import { addContact } from 'components/Redux/contactsSlice';
+import { addContact, getContactsValue } from 'components/Redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const PhoneBookSchema = Yup.object().shape({
   name: Yup.string().min(3, 'Too Short!').required('Required'),
@@ -25,7 +24,7 @@ const PhoneBookSchema = Yup.object().shape({
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(getContactsValue);
 
   const handleCheckContact = values => {
     const checkContact = contacts.some(
@@ -45,8 +44,7 @@ export const ContactForm = () => {
         number: '',
       }}
       validationSchema={PhoneBookSchema}
-      onSubmit={(values, actions) => {
-        actions.resetForm();
+      onSubmit={values => {
         handleCheckContact(values);
       }}
     >
