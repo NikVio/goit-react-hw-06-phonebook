@@ -15,7 +15,7 @@ export const contactsSlice = createSlice({
   reducers: {
     addContact: {
       reduser(state, action) {
-        return [...state, action.payload];
+        state = [...state, action.payload];
       },
       prepare(contact) {
         return {
